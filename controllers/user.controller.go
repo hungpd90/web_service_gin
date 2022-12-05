@@ -97,7 +97,6 @@ func SignUp() gin.HandlerFunc {
 		database.DB.Create(&user)
 
 		// Create JWT
-		
 
 		utils.SendResponse(c, http.StatusCreated, "Success", true)
 	}
@@ -105,6 +104,34 @@ func SignUp() gin.HandlerFunc {
 
 func SignIn() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		var body validates.SignInBody
+		if err := c.BindJSON(&body); err != nil {
+			utils.SendResponse(c, http.StatusBadRequest, err.Error(), "")
+			return
+		}
+		var user models.User
+
+		//Check if user existed by email
+		result := database.DB.Where("email = ?", body.Email).First(&user)
+		if result.RowsAffected < 1 {
+			utils.SendResponse(c, http.StatusNotFound, "Email not existed", "")
+			return
+		}
+
+		//Check password
+		if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(body.Password)); err != nil {
+			utils.SendResponse(c, http.StatusBadRequest, "Password wrong", "")
+			return
+		}
+		//Generate token and send back
+		if signedString, err := utils.GenerateToken(strconv.FormatUint(uint64(user.ID), 10), user.Email, user.PhoneNumber); err != nil {
+			utils.SendResponse(c, http.StatusBadRequest, err.Error(), "")
+			return
+		} else {
+			utils.SendResponse(c, http.StatusOK, "Success", gin.H{"token": signedString})
+			fmt.Printf(signedString)
+			return
+		}
 
 	}
 }

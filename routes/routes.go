@@ -16,5 +16,6 @@ func Routes(router *gin.Engine) {
 			userRoute.GET("/:id", controllers.GetUser())
 		}
 		v1.POST("/signup", controllers.SignUp())
+		v1.POST("/signin", controllers.SignIn())
 	}
 }

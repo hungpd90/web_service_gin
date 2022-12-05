@@ -10,7 +10,7 @@ func LoadConfigEnv() {
 	os.Setenv("DATABASE_USER", "root")
 	os.Setenv("DATABASE_PORT", "8001")
 	os.Setenv("DATABASE_PASSWORD", "1")
-	os.Setenv("DATABASE_NAME", "root")
+	os.Setenv("DATABASE_NAME", "db")
 
 	//JWT Env Variable
 	os.Setenv("SECRET_KEY", "ultra_secret_key")
