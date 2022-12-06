@@ -3,23 +3,22 @@ package database
 import (
 	"fmt"
 	"log"
-	"os"
 
-	configs "web-service-gin/configs"
 	models "web-service-gin/models"
+	"web-service-gin/utils"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 func Init() *gorm.DB {
-	configs.LoadConfigEnv()
+	utils.LoadConfig()
 	dbURL := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
-		os.Getenv("DATABASE_HOST"),
-		os.Getenv("DATABASE_USER"),
-		os.Getenv("DATABASE_PASSWORD"),
-		os.Getenv("DATABASE_NAME"),
-		os.Getenv("DATABASE_PORT"),
+		utils.Config.DatabaseHost,
+		utils.Config.DatabaseUser,
+		utils.Config.DatabasePassword,
+		utils.Config.DatabaseName,
+		utils.Config.DatabasePort,
 	)
 	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
 
@@ -33,7 +32,6 @@ func Init() *gorm.DB {
 var DB *gorm.DB = Init()
 
 func Sync() {
-	DB.AutoMigrate(&models.User{})
+	DB.AutoMigrate(&models.User{}, &models.Product{}, &models.Manufacturer{})
 	// fmt.Println(db.Find(&users))
-
 }

@@ -136,6 +136,16 @@ func SignIn() gin.HandlerFunc {
 	}
 }
 
+func GetSelfInfo() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		utils.SendResponse(c, http.StatusOK, "Success", gin.H{
+			"id":           c.GetString("id"),
+			"email":        c.GetString("email"),
+			"phone_number": c.GetString("phone_number"),
+		})
+	}
+}
+
 func HashPassword(password string) string {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
 	if err != nil {
