@@ -20,5 +20,6 @@ func main() {
 
 	routes.Routes(router)
 
-	router.Run("localhost:8000")
+	// router.Run("localhost:8000")
+	router.Run()
 }
