@@ -1,0 +1,11 @@
+.carousel .thumb {
+  display: none;
+}
+.carousel-status {
+  display: none;
+}
+.carousel-root {
+  margin-bottom: -24px;
+  margin-top: 124px;
+  
+}
