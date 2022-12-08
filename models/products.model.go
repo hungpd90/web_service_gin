@@ -11,14 +11,14 @@ type Product struct {
 	SKU            string
 	Name           string
 	Description    string
-	Images         string
+	Images         pq.StringArray `gorm:"type:text[]"`
 	Rating         float64
 	Price          float64
 	Quantity       uint
 	SoldAmount     uint
-	ManufacturerId pq.StringArray `gorm:"type:string[]"`
-	Manufacturer   Manufacturer
-	IsDeleted      bool `gorm:"default:false"`
+	ManufacturerId string
+	Manufacturer   Manufacturer `gorm:"foreignKey:ManufacturerId;references:ID" `
+	IsDeleted      bool         `gorm:"default:false"`
 	CreatedAt      time.Time
 	UpdatedAt      time.Time
 }

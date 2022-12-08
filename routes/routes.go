@@ -20,5 +20,16 @@ func Routes(router *gin.Engine) {
 			userRoute.GET("/", controllers.GetUsers())
 			userRoute.GET("/:id", controllers.GetUser())
 		}
+		adminRoute := v1.Group("/admin")
+		{
+			adminRoute.GET("/users", controllers.GetUsers())
+			adminRoute.GET("/user", controllers.GetUser())
+		}
+		productRoute := v1.Group("/products")
+		{
+			productRoute.GET("/", controllers.GetProducts())
+			//productRoute.POST("/products", middlewares.Authorization(), controllers.CreateProduct())
+			productRoute.POST("/", controllers.CreateProduct())
+		}
 	}
 }
