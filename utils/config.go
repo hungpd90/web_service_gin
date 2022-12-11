@@ -12,6 +12,10 @@ type ConfigStruct struct {
 	DatabaseName     string `mapstructure:"DATABASE_NAME"`
 	SecretKey        string `mapstructure:"SECRET_KEY"`
 	JwtLife          string `mapstructure:"JWT_LIFE"`
+	AwsAccessKey     string `mapstructure:"AWS_ACCESS_KEY"`
+	AwsSecretKey     string `mapstructure:"AWS_SECRET_KEY"`
+	AwsRegion        string `mapstructure:"AWS_REGION"`
+	AWSS3Bucket      string `mapstructure:"AWS_S3_BUCKET"`
 }
 
 var Config ConfigStruct

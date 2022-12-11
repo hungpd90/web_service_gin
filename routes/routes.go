@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"web-service-gin/configs"
 	"web-service-gin/controllers"
 	"web-service-gin/middlewares"
 
@@ -30,6 +31,8 @@ func Routes(router *gin.Engine) {
 			productRoute.GET("/", controllers.GetProducts())
 			//productRoute.POST("/products", middlewares.Authorization(), controllers.CreateProduct())
 			productRoute.POST("/", controllers.CreateProduct())
+			productRoute.GET("/upload-image", configs.UploadObject())
+			productRoute.GET("/image-link", configs.GetFileLink())
 		}
 	}
 }
