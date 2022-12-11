@@ -45,13 +45,14 @@ func UploadObject() gin.HandlerFunc {
 			&s3.PutObjectInput{
 				Bucket: &utils.Config.AWSS3Bucket,
 				Key:    &fileName,
-				ACL:    aws.String("public-read-write"),
+				//ACL:    aws.String("public-read-write"),
 			})
 		// Upload to s3
 
-		//q := r.HTTPRequest.URL.Query()
-		//q.Add("x-amz-acl", "public-read")
-		//q.Add("Content-Type", c.ContentType())
+		//r.HTTPRequest.Header.Add("X-Amz-Acl", "public-read")
+		// q := r.HTTPRequest.URL.Query()
+		// q.Add("acl", "public-read")
+		// q.Add("Content-Type", c.ContentType())
 		presigned, err := r.Presign(5 * time.Minute)
 		if err != nil {
 			fmt.Println(err)
