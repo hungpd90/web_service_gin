@@ -9,5 +9,5 @@ type CreateProductBody struct {
 	Images         pq.StringArray `gorm:"type:string[]" json:"images"`
 	Price          float64        `json:"price" binding:"required"`
 	Quantity       uint           `json:"quantity" binding:"required"`
-	ManufacturerId string         `json:"manufacturer_id" binding:"required"`
+	ManufacturerId uint           `json:"manufacturer_id" binding:"required"`
 }

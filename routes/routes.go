@@ -34,5 +34,10 @@ func Routes(router *gin.Engine) {
 			productRoute.GET("/upload-image", configs.UploadObject())
 			productRoute.GET("/image-link", configs.GetFileLink())
 		}
+		manufacturerRoute := v1.Group("/manufacturers")
+		{
+			manufacturerRoute.GET("/", controllers.GetManufacturers())
+			manufacturerRoute.POST("/", controllers.CreateManufacturer())
+		}
 	}
 }

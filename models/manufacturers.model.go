@@ -3,7 +3,7 @@ package models
 import "time"
 
 type Manufacturer struct {
-	ID        string
+	ID        uint `gorm:"primaryKey"`
 	Name      string
 	Origin    string
 	IsDeleted bool `gorm:"default:false"`
