@@ -16,8 +16,8 @@ type Product struct {
 	Price          float64
 	Quantity       uint
 	SoldAmount     uint
-	ManufacturerId string
-	Manufacturer   Manufacturer `gorm:"foreignKey:ManufacturerId;references:ID" `
+	ManufacturerId uint
+	Manufacturer   Manufacturer `gorm:"foreignKey:manufacturer_id"`
 	IsDeleted      bool         `gorm:"default:false"`
 	CreatedAt      time.Time
 	UpdatedAt      time.Time

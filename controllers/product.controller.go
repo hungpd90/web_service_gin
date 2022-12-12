@@ -14,7 +14,7 @@ func GetProducts() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var products []models.Product
 		var pagination utils.Pagination
-		database.DB.Scopes(utils.Paginate(products, &pagination, database.DB)).Find(&products)
+		database.DB.Scopes(utils.Paginate(products, &pagination, database.DB)).Joins("Manufacturer").Find(&products)
 		pagination.Rows = products
 		utils.SendResponse(c, http.StatusOK, "Success", pagination)
 	}

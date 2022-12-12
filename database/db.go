@@ -32,6 +32,6 @@ func Init() *gorm.DB {
 var DB *gorm.DB = Init()
 
 func Sync() {
-	DB.AutoMigrate(&models.User{}, &models.Product{}, &models.Manufacturer{})
+	DB.AutoMigrate(&models.User{}, &models.Product{}, &models.Manufacturer{}, &models.Admin{})
 	// fmt.Println(db.Find(&users))
 }
