@@ -126,35 +126,6 @@ const SignUp = () => {
                             </div>
                           </div>
 
-                          <div class="form-check">
-                            <input
-                              type="radio"
-                              class="form-check-input align-items-center"
-                              id="radio1"
-                              name="optradio"
-                              value="option1"
-                              checked
-                            />
-                            Nam
-                            <label
-                              class="form-check-label"
-                              for="radio1"
-                            ></label>
-                          </div>
-                          <div class="form-check">
-                            <input
-                              type="radio"
-                              class="form-check-input"
-                              id="radio2"
-                              name="optradio"
-                              value="option2"
-                            />
-                            Nữ
-                            <label
-                              class="form-check-label"
-                              for="radio2"
-                            ></label>
-                          </div>
                           <div class="form-check d-flex justify-content-center mb-5">
                             <input
                               class="form-check-input me-2"
