@@ -17,8 +17,9 @@ type SignedDetails struct {
 }
 
 func GenerateToken(id string, email string, phone_number string) (signed string, err error) {
-	SECRET_KEY := os.Getenv("SECRET_KEY")
-	JWT_LIFE_INT, err := strconv.Atoi(os.Getenv("JWT_LIFE"))
+	LoadConfig()
+	SECRET_KEY := Config.SecretKey
+	JWT_LIFE_INT, err := strconv.Atoi(Config.JwtLife)
 	if err != nil {
 		log.Panic(err)
 	}

@@ -13,14 +13,10 @@ import (
 func GetProducts() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var products []models.Product
-		var count int64
-		database.DB.Find(&products).Count(&count)
-		utils.SendResponse(c, http.StatusOK, "Success", gin.H{
-			"records": products,
-			"metadata": gin.H{
-				"total_count": count,
-			},
-		})
+		var pagination utils.Pagination
+		database.DB.Scopes(utils.Paginate(products, &pagination, database.DB)).Find(&products)
+		pagination.Rows = products
+		utils.SendResponse(c, http.StatusOK, "Success", pagination)
 	}
 }
 func CreateProduct() gin.HandlerFunc {

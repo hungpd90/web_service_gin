@@ -28,13 +28,10 @@ func CreateManufacturer() gin.HandlerFunc {
 func GetManufacturers() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var manufacturers []models.Manufacturer
-		var count int64
-		database.DB.Find(&manufacturers).Count(&count)
-		utils.SendResponse(c, http.StatusOK, "Success", gin.H{
-			"records": manufacturers,
-			"metadata": gin.H{
-				"total_count": count,
-			},
-		})
+		var pagination utils.Pagination
+		utils.GetPaginationParameter(c, &pagination)
+		database.DB.Scopes(utils.Paginate(manufacturers, &pagination, database.DB)).Find(&manufacturers)
+		pagination.Rows = manufacturers
+		utils.SendResponse(c, http.StatusOK, "Success", pagination)
 	}
 }

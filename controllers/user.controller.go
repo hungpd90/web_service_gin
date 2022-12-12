@@ -34,8 +34,10 @@ func CreateUser() gin.HandlerFunc {
 func GetUsers() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var users []models.User
-		database.DB.Find(&users)
-		utils.SendResponse(c, http.StatusOK, "Success", users)
+		var pagination utils.Pagination
+		database.DB.Scopes(utils.Paginate(users, &pagination, database.DB)).Find(&users)
+		pagination.Rows = users
+		utils.SendResponse(c, http.StatusOK, "Success", pagination)
 	}
 }
 
