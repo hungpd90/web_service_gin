@@ -1,16 +1,36 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Header from "../components/Header";
+import { postSignup } from "../services/apiServices";
 const SignUp = () => {
   const [firstName, setfName] = useState("");
   const [lastName, setlName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  function SignUp() {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-  }
+  const navigate = useNavigate();
+  const handleSignUp = async () => {
+    let data = await postSignup(
+      firstName,
+      lastName,
+      password,
+      email,
+      phoneNumber
+    );
+    console.log(data.data.header.status);
+
+    if (data.data.header.status === 0) {
+      alert(data.data.body.data.message);
+      navigate("/Active");
+    } else {
+      navigate("/SignUp");
+      // console.log(data.data.header);
+      alert(data.data.header.errorDetail.errorMessage);
+
+      // alert(data.data.message);
+    }
+  };
 
   return (
     <>
@@ -84,7 +104,22 @@ const SignUp = () => {
                               />
                             </div>
                           </div>
-
+                          <div class="d-flex flex-row align-items-center mb-4">
+                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                            <div class="form-outline flex-fill mb-0">
+                              <label class="form-label" for="form3Example3c">
+                                Số Điện Thoại
+                              </label>
+                              <input
+                                type="email"
+                                id="form3Example3c"
+                                class="form-control"
+                                onChange={(event) =>
+                                  setPhoneNumber(event.target.value)
+                                }
+                              />
+                            </div>
+                          </div>
                           <div class="d-flex flex-row align-items-center mb-4">
                             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                             <div class="form-outline flex-fill mb-0">
@@ -119,7 +154,7 @@ const SignUp = () => {
                             <button
                               type="button"
                               class="btn btn-primary btn-lg"
-                              onClick={SignUp}
+                              onClick={handleSignUp}
                             >
                               Đăng Ký
                             </button>

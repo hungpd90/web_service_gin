@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
+import ActiveAccount from "./pages/ActiveAccount";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Route exact path="/Home" element={<Home />}></Route>
       <Route exact path="/" element={<Home />}></Route>
       <Route exact path="/Logins" element={<Login />}></Route>
+      <Route exact path="/Active" element={<ActiveAccount />}></Route>
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")

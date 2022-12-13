@@ -25,13 +25,17 @@ const Login = () => {
     e.preventDefault();
     //
     let data = await postLogin(userName, passWord);
-    console.log(data);
-    if ((data.message = "Đăng nhập thành công")) {
-      toast.success(data.EM);
+    // console.log(data.data.header.status);
+    if (data.data.header.status === 0) {
+      toast.success(data.data.body.data.message);
+      alert(data.data.body.data.message);
+      // console.log(data.data);
+
       navigate("/Home");
     }
-    if (data == null) {
-      toast.error(data.EM);
+    // console.log(data.message);
+    else {
+      alert(data.data.header.errorDetail.errorMessage);
     }
   };
 
