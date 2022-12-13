@@ -10,30 +10,6 @@ const SignUp = () => {
   function SignUp() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      password: "string",
-      phoneNumber: "string",
-      email: "string",
-      firstName: "string",
-      lastName: "string",
-      dob: "2022-12-06T06:48:49.559Z",
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch(
-      "http://localhost:8080/auth/register?password=password&phoneNumber=phoneNumber&email=email&firstName=firstName&lastName=lastName&dob=2022-12-06T06:41:04.011Z",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
   }
 
   return (
