@@ -14,16 +14,16 @@ const ActiveAccount = () => {
     e.preventDefault();
     //
     let data = await postActive(email, code);
-    console.log(data.data.body.data.status);
+
     if (data.data.body.data.status === 0) {
-      toast.success("data.message");
+      toast.success("data.data.body.data.message");
       //   console.log(data.data.header.errorDetail.errorMessage);
       //   console.log(data);
       //   navigate("/Home");
       alert(data.data.body.data.message);
       navigate("/Home");
     } else {
-      toast.error("");
+      toast.error("data.data.body.data.message");
       alert(data.data.body.data.message);
 
       //   alert(data.data.header.errorDetail.errorMessage);
@@ -63,7 +63,7 @@ const ActiveAccount = () => {
                 className="btn btn-primary"
                 onClick={handleActive}
               >
-                Đăng Ký
+                Tạo tài khoản
               </button>
             </div>
           </div>

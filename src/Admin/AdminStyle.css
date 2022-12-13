@@ -1,0 +1,9 @@
+.admin-container {
+  display: flex;
+}
+.table-content {
+  display: flex;
+}
+.table {
+  width: 100%;
+}
