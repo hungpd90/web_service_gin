@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import Header from "../components/Header";
 import "../css/LoginStyle.css";
 import { postLogin } from "../services/apiServices";
@@ -7,13 +8,33 @@ import { postLogin } from "../services/apiServices";
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [passWord, setPassWord] = useState("");
+  const navigate = useNavigate();
+  <ToastContainer
+    position="top-right"
+    autoclose={5000}
+    hideProcessBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+  />;
   const login = async (e) => {
     //validate
     e.preventDefault();
     //
-    let res = await postLogin(userName, passWord);
-    console.log(res);
+    let data = await postLogin(userName, passWord);
+    console.log(data);
+    if ((data.message = "Đăng nhập thành công")) {
+      toast.success(data.EM);
+      navigate("/Home");
+    }
+    if (data == null) {
+      toast.error(data.EM);
+    }
   };
+
   return (
     <>
       <div className="headers">
