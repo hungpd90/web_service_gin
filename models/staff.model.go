@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-type Admin struct {
+type Staff struct {
 	ID          uint      `gorm:"primaryKey" json:"id"`
 	FirstName   string    `json:"first_name"`
 	LastName    string    `json:"last_name"`
